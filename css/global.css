@@ -57,7 +57,7 @@ body {
 
 html * {
 	color: var(--global-fg) !important;
-	font-family: 'Inter', 'Roboto', sans-serif !important;
+	font-family: 'Ubuntu Light', 'Ubuntu', 'Inter', 'Roboto', sans-serif !important;
 }
 
 /* Remove outline on input fields on chrome */

@@ -3,10 +3,9 @@ class GreeterScreen {
 		this._screenGreeter = document.querySelector('#screen-greeter');
 		this._passwordInput = document.querySelector('#input-password');
 		this._buttonScreenGreeter = document.querySelector('#button-greeter-screen');
-		this._arrowIndicatorGreeter = document.querySelector('#arrow-indicator-greeter');
 		this._screenGreeterVisible = true;
 		this._buttonGreeterClickEvent();
-		this._arrowIndicatorClickEvent();
+		this._anywhereClickEvent();
 	}
 
 	getGreeterVisibility() {
@@ -22,8 +21,8 @@ class GreeterScreen {
 		);
 	}
 
-	_arrowIndicatorClickEvent() {
-		this._arrowIndicatorGreeter.addEventListener(
+	_anywhereClickEvent() {
+		this._screenGreeter.addEventListener(
 			'click',
 			() => {
 				this._hideGreeter();

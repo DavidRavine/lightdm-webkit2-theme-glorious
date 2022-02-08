@@ -4,7 +4,7 @@
 	border: none;
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 40%;
 	transform: translate(-50%, -50%);
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -38,8 +38,8 @@
 }
 
 #image-profile {
-	height: 128px;
-	width: 128px;
+	height: 12em;
+	width: 12em;
 	border-radius: 50%;
 	object-fit: cover;
 	flex-flow: column wrap;
@@ -136,7 +136,7 @@ label#label-user-name {
 
 #input-password {
 	height: 100%;
-	width: 180px;
+	width: 15em;
 	border: none;
 	border-radius: 6px;
 	text-align: center;

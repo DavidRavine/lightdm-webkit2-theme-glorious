@@ -31,7 +31,8 @@
 .screen-background-darken::before {
 	width: 100vw;
 	height: 100vh;
-	background: #000000;
+    /* TODO: implement gradient to support themes */
+	background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%);
 	filter: grayscale(100%);
 	opacity: 0.75;
 	content: '';
@@ -44,9 +45,8 @@
 .screen-content-parent {
 	display: inline-block;
 	position: relative;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+	left: 5%;
+	top: 60%;
 }
 
 /* Goodbye screen */
@@ -77,6 +77,9 @@
 
 #screen-goodbye-content-parent.screen-content-parent {
 	display: inline-flex;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 #goodbye-message.goodbye-content {
@@ -112,22 +115,22 @@
 
 #greeter-message.greeter-content {
 	font-size: 32pt;
-	font-weight: 400;
-	text-align: center;
+	font-weight: 100;
+	text-align: left;
 	color: var(--global-fg);
 }
 
 #greeter-clock.greeter-content {
-	font-size: 72pt;
-	font-weight: 700;
-	text-align: center;
+	font-size: 122pt;
+	font-weight: 100;
+	text-align: left;
 	color: var(--global-fg);
 }
 
 #greeter-date.greeter-content {
 	font-size: 32pt;
-	font-weight: 400;
-	text-align: center;
+	font-weight: 100;
+	text-align: left;
 	color: var(--global-fg);
 }
 
