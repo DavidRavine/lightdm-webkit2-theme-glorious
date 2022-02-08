@@ -66,6 +66,8 @@ class Power {
 			'click',
 			() => {
 				this._disableWindowPropagation();
+                sidebar.hideSidebar();
+                this._inputPassword = document.querySelector('#input-password');
 				goodbye.showGoodbye(powerObj.icon, powerObj.message);
 				this._executePowerCallback(powerObj.powerCommand);
 			}

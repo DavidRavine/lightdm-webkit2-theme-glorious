@@ -3,6 +3,7 @@ class Goodbye {
 		this._goodbyeScreen = document.querySelector('#screen-goodbye.screen');
 		this._goodbyePowerIcon = document.querySelector('#goodbye-power-icon');
 		this._goodbyeMessage = document.querySelector('#goodbye-message');
+		this._inputPassword = document.querySelector('#input-password');
 		this._goodbyeScreenVisible = false;
 	}
 
@@ -22,6 +23,7 @@ class Goodbye {
 
 	hideGoodbye() {
 		this._goodbyeScreen.classList.remove('screen-goodbye-show');
+        this._inputPassword.focus();
 		this._goodbyeScreenVisible = false;
 	}
 }
