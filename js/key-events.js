@@ -41,6 +41,9 @@ class KeyEvents {
 		document.addEventListener(
 			'keyup',
 			e => {
+                if (goodbye.getGoodbyeVisibility()) {
+                    goodbye.hideGoodbye();
+                }
 				// Toggle sidebar
 				if ((this._keysLog[this._modifierKey]) && (e.key === this._sidebarKey)) {
 					e.preventDefault();
