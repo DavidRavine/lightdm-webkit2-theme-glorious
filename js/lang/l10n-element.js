@@ -32,8 +32,8 @@ class L10nElement extends HTMLElement
 
     _translateText(text)
     {
-        if (typeof language !== typeof undefined) {
-            return language.__(text);
+        if (typeof l10n !== typeof undefined) {
+            return l10n.__(text);
         }
         return text;
     }

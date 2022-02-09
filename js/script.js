@@ -1,7 +1,7 @@
 // Instantiate debug mode
 const debug = new Debug();
 
-const language = new Language();
+const l10n = new Language();
 
 if (typeof L10nElement === 'function')
     window.customElements.define('l-10n', L10nElement);

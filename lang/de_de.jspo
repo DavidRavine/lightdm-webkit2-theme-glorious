@@ -1,0 +1,51 @@
+LanguagePack.de_de = {
+    "Shutting down...": "Herunterfahren ...",
+    "Enter Password": "Passwort eingeben",
+    "Accounts": "Benutzerkonen",
+    "Sessions": "Sitzungen",
+    "Background": "Hintergrund",
+    "Themes": "Design",
+    "Keybindings": "Tastenkürzel",
+    "Power": "",
+    "Background Color and Opacity": "",
+    "Foreground Color and Opacity": "",
+    "Blur Strength": "",
+    "Animation Speed": "",
+    "Reset": "Zurücksetzen",
+    "Apply": "Anwenden",
+    "Modifier Key": "",
+    "Sidebar Key": "",
+    "Sessions Key": "",
+    "Power Key": "",
+    "Accounts Key": "",
+    "Close/Back Key": "",
+    "%o": (day, twoDigitDay) => `${day}ter`,
+    "Good day": (hour) => {
+        if (hour >= 5 && hour < 12) {
+            return "Guten Morgen!";
+        } else if (hour >= 12 && hour < 17) {
+            return "Guten Tag!"
+        }
+        return "Guten Abend!"
+    },
+    "%D": [
+        "Sonntag",
+        "Montag",
+        "Dienstag",
+        "Mittwoch",
+        "Donnerstag",
+        "Freitag",
+        "Samstag"
+    ],
+    "%M": [
+        "Januar",
+        "Februar",
+        "März"
+    ],
+    "Sidebar" : {
+        "%D, %M %o, %y": "%D, %d.%m.%y",
+    },
+    "Lock Screen" : {
+        "%o of %M, %y": "%D, %d. %M %y",
+    },
+}

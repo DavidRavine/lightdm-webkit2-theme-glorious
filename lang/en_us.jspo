@@ -1,0 +1,60 @@
+LanguagePack.en_us = {
+    "Shutting down...": "",
+    "Enter Password": "",
+    "Accounts": "",
+    "Sessions": "",
+    "Background": "",
+    "Themes": "",
+    "Keybindings": "",
+    "Power": "",
+    "Background Color and Opacity": "",
+    "Foreground Color and Opacity": "",
+    "Blur Strength": "",
+    "Animation Speed": "",
+    "Reset": "",
+    "Apply": "",
+    "Modifier Key": "",
+    "Sidebar Key": "",
+    "Sessions Key": "",
+    "Power Key": "",
+    "Accounts Key": "",
+    "Close/Back Key": "",
+    "%o": (day, twoDigitDay) => day + ({"1":"st", "2":"nd", "3":"rd"}[twoDigitDay[1]] || "th"),
+    "Good day": (hour) => {
+        if (hour >=6 && hour < 12) {
+            return "Good Morning!";
+        } else if (hour >= 12 && hour < 18) {
+            return "Good Afternoon!";
+        }
+        return "Good Evening";
+    },
+    "%D": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ],
+    "%M": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ],
+    "Sidebar" : {
+        "%D, %M %o, %y": "",
+    },
+    "Lock Screen" : {
+        "%o of %M, %y": "",
+    },
+}
