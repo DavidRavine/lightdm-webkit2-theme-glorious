@@ -20,7 +20,7 @@ class Language
         if (context)
             return this._languagePack[context][text] ? this._languagePack[context][text] : '';
         else
-            return this._languagePack[text] ? this._languagePack[text] : '';
+            return this._languagePack[text] ? this._languagePack[text] : text;
     }
 }
 
