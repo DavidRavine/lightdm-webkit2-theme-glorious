@@ -12,7 +12,16 @@ class L10nElement extends HTMLElement
     set attr(attributeName)
     {
         if (typeof attributeName === typeof '' && attributeName.length > 0) {
-            this.setAttribute(attributeName);
+            this.setAttribute('attr', attributeName);
+        }
+    }
+    get context()
+    {
+        return this.hasAttribute('context') ? this.getAttribute('context') : false;
+    }
+    set context(contextName) {
+        if (typeof contextName == typeof '' && contextName.length > 0) {
+            this.setAttribute('context', contextName);
         }
     }
 
@@ -25,6 +34,9 @@ class L10nElement extends HTMLElement
                 }
             }
         }
+        else if (this.context) {
+            this.innerHTML = this._translateTextInContext(this.innerHTML, this.context)
+        }
         else {
             this.innerHTML = this._translateText(this.innerHTML);
         }
@@ -34,6 +46,12 @@ class L10nElement extends HTMLElement
     {
         if (typeof l10n !== typeof undefined) {
             return l10n.__(text);
+        }
+        return text;
+    }
+    _translateTextInContext(text, context) {
+        if (typeof l10n !== typeof undefined) {
+            return l10n._x(text, context);
         }
         return text;
     }

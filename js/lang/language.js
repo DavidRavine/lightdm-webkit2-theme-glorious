@@ -34,17 +34,27 @@ class Language
         return value && value.length > 0 ? value : (target[this._languageFallback] && target[this._languageFallback].length > 0 ? target[this._languageFallback] : text);
     }
 
+    /**
+     * Get a sring based on parameter
+     *
+     * The target should be a function taking the specified number of parameters (-1) as arguments
+     * If the first parameter is an integer, the target may also be an array
+     * The last parameter is used as the default value
+     */
     _p(text, ...params)
     {
         let value = text;
         let target = this._maybeGet(text);
         if (typeof target === typeof '')
             target = this._maybeGet(text, this._languageFallback);
-        if (typeof target === typeof '')
-            return text;
+        if (typeof target === typeof '') {
+            if (params.length >= 1)
+                target = params.slice(-1);
+            else return text;
+        }
 
         if (typeof target == 'function') {
-            value = target(...params);
+            value = target(...params.slice(0, params.length - 1));
         }
         else if (Array.isArray(target)) {
             if (Number.isInteger(params[0])) {

@@ -7,6 +7,10 @@ param_js_re = re.compile("\._p\(\s*[\"'](.+)(?:[\"']\s*,)\s*(.+)(?:\s*\))")
 ctx_js_re = re.compile("\._x\(\s*[\"'](.+)(?:[\"']\s*,)\s*[\"'](.+)(?:[\"']\s*)")
 arg_re = re.compile("[a-zA-Z][a-zA-Z1-9]*")
 
+comment_js_re = re.compile("\/\/\s*TN:.*")
+param_start_re = re.compile("\._p\(")
+pre_param_start_re = re.compile(".*(?:\._p\()")
+
 contexts = {
     "global": {}
 }
@@ -18,13 +22,13 @@ def evaluate_html_tags(fcontents):
             if (match.group('prop') == "context"):
                 if match.group("propval") not in contexts:
                     contexts[match.group('propval')] = {}
-                contexts[match.group('propval')][match.group("string")] = ""
+                contexts[match.group('propval')][match.group("string")] = {"val", ""}
             elif (match.group("prop") == "attr"):
                 attr_match = re.search(match.group("propval") + "=[\"']([^\"']+)[\"']", match.group("string"))
                 if (attr_match.group(1)):
-                    contexts["global"][attr_match.group(1)] = ""
+                    contexts["global"][attr_match.group(1)] = {"val": ""}
         else:
-            contexts["global"][match.group("string")] = ""
+            contexts["global"][match.group("string")] = {"val": ""}
 class It:
     it = 0
     def reset(self):
@@ -32,6 +36,74 @@ class It:
     def get(self):
         self.it += 1
         return self.it
+
+def commit_parameterized(args, translators_note = ""):
+    i = It()
+    print ("\n  [" + ",".join(args) + "]\n")
+    sanitisedArgs = map(lambda a: a.strip() if arg_re.fullmatch(a.strip()) else f"arg{i.get()}" , args[1:-1])
+    t_dict = { "val": f"({', '.join(sanitisedArgs)}) => \"\"" }
+    if (translators_note != ""):
+        t_dict["tn"] = translators_note
+    contexts["global"][args[0][1:-1]] = t_dict
+
+
+def parse_js_calls(file):
+    last_note = ""
+    buffer = ""
+    args = []
+    reading = False
+    escaped = False
+    brace_count = 0
+    in_quote = False
+    done = False
+
+    while True:
+        char = file.read(1)
+        if char == "":
+            break
+        buffer += char
+
+        if not reading and char == "\n":
+            tn_match = comment_js_re.search(buffer)
+            if tn_match is not None:
+                last_note = tn_match.group(0)
+            buffer = ""
+            continue
+            
+        if not reading and param_start_re.search(buffer) is not None:
+            print(buffer)
+            buffer = ""
+            brace_count = 1
+            reading = True
+            continue
+
+        if reading:
+            #print(char)
+            if char == "\\":
+                escaped = True
+            if not escaped:
+                if char == "(":
+                    brace_count += 1
+                elif char == ")":
+                    brace_count -= 1
+                elif char == "\"" or char == "'":
+                    if in_quote and in_quote == char:
+                        in_quote = False
+                    elif not in_quote:
+                        in_quote = char
+            escaped = False
+
+            if not in_quote and brace_count == 1 and char == ",":
+                args.append(buffer[:-1])
+                buffer = ""
+            #print(f"bc: {brace_count}")
+            if brace_count == 0:
+                args.append(buffer[:-1])
+                commit_parameterized(args, last_note)
+                last_note = ""
+                reading = False
+                args = []
+
 
 def evaluate_js_calls(fcontents):
     for match in global_js_re.finditer(fcontents):
@@ -54,13 +126,14 @@ def get_strings(file):
 
     if (file[-4:] == "html"):
         evaluate_html_tags(fstream.read())
-    elif (file[-2:] == "js"):
-        evaluate_js_calls(fstream.read())
+    elif (file[-12:] == "date-time.js"):
+        #evaluate_js_calls(fstream.read())
+        parse_js_calls(fstream)
 
 def scan_files(dir):
     for root, dirs, files in os.walk(dir):
         for filename in files:
-            print(os.path.join(root, filename))
+            # print(os.path.join(root, filename))
             get_strings(os.path.join(root, filename))
 
 
@@ -94,11 +167,13 @@ def write_jspot(filename, package_name):
 def __main__():
     pwd = os.path.dirname(os.path.realpath(__file__))
     scan_files(pwd)
-    write_jspot(os.path.join(pwd, "lang/language-pack.jspot"), "LanguagePack")
+#    write_jspot(os.path.join(pwd, "lang/language-pack.jspot"), "LanguagePack")
     for k, v in contexts.items():
         print(k + ": { ")
         for s, t in v.items():
-            print(s + ": " + t)
+            if "tn" in t:
+                print(t["tn"])
+            print(s + ": " + t["val"])
         print("}")
         
 

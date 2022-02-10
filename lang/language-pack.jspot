@@ -19,10 +19,9 @@ LanguagePack = {
     "Power Key": "",
     "Accounts Key": "",
     "Close/Back Key": "",
-    "%o": (day, twoDigitDay) => "",
-    "Good day": (hour) => "",
-    "%D": (arg1) => "",
-    "%M": (arg1) => "",
+    "Good day": (hour, arg1) => "",
+    "%D": (arg1, arg2) => "",
+    "%M": (arg1, arg2) => "",
     "Sidebar" : {
         "%D, %M %o, %y": "",
     },

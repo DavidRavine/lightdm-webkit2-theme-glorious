@@ -19,6 +19,7 @@ LanguagePack.de_de = {
     "Power Key": "",
     "Accounts Key": "",
     "Close/Back Key": "",
+    "My own key": "",
     "%o": (day, twoDigitDay) => `${day}ter`,
     "Good day": (hour) => {
         if (hour >= 5 && hour < 12) {

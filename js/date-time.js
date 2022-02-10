@@ -39,9 +39,9 @@ class DateTime {
 
 	_getDayOrdinal(day) {
         const twoDigitDay = this._prependZero(day);
-        return l10n._p('%o', day, twoDigitDay);
-		return day + (day > 0 ? ['th', 'st', 'nd', 'rd'][(day > 3 && day < 21) ||
-			day % 10 > 3 ? 0 : day % 10] : '');
+        // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
+        return l10n._p('%o', day, twoDigitDay,
+            (day, twoDigitDay) => day + ({"1":"st", "2":"nd", "3":"rd"}[twoDigitDay[1]] || "th"));
 	}
 
 	// prepend zero if k has less than 2 decimal digits
@@ -54,6 +54,16 @@ class DateTime {
 		}
 	}
 
+    _getDaytimeGreeting(hour)
+    {
+		if (hour >= 6 && hour < 12) {
+			return 'Morning';
+		} else if (hour >= 12 && hour < 18) {
+			return 'Afternoon';
+		}
+		return 'Evening';
+    }
+
 	_setTime() {
 		const date = new Date();
 		let hour = date.getHours();
@@ -62,14 +72,7 @@ class DateTime {
 		let greeterSuffix = null;
 		min = this._prependZero(min);
 
-        const daytimeGreeting = l10n._p('Good day', hour);
-//		if (hour >= 6 && hour < 12) {
-//			greeterSuffix = 'Morning';
-//		} else if (hour >= 12 && hour < 17) {
-//			greeterSuffix = 'Afternoon';
-//		} else {
-//			greeterSuffix = 'Evening';
-//		}
+        const daytimeGreeting = l10n._p('Good day', hour, this._getDaytimeGreeting);
 
 		// 24-hour mode
 		if (this._twentyFourMode === true) {
@@ -125,8 +128,8 @@ class DateTime {
     _sprintfDate(format, date)
     {
         return format
-                .replace('%D', l10n._p('%D', date.getDay()))
-                .replace('%M', l10n._p('%M', date.getMonth()))
+                .replace('%D', l10n._p('%D', date.getDay(), this._daysArr) )
+                .replace('%M', l10n._p('%M', date.getMonth(), this._monthsArr))
                 .replace('%o', this._getDayOrdinal(date.getDate()))
                 .replace('%d', this._prependZero(date.getDate()) )
                 .replace('%m', this._prependZero(date.getMonth()) )
