@@ -3,6 +3,9 @@ class Power {
 		this._localStorage = window.localStorage;
 		this._powerList = document.querySelector('#power-list.sidebar-settings-item-list');
 		this._powerObject = [];
+
+        this._updatePowerList = this._updatePowerList.bind(this);
+
 		this._init();
 	}
 
@@ -103,6 +106,13 @@ class Power {
 			this._powerList.appendChild(listItem);
 		}
 	}
+    
+    _updatePowerList()
+    {
+        this._createPowerObject();
+        this._powerList.innerHTML = "";
+        this._createPowerList();
+    }
 
 	_init() {
 		if (!lightdm) {
@@ -115,5 +125,9 @@ class Power {
 			this._createPowerObject();
 		}
 		this._createPowerList();
+
+        if (typeof l10n !== typeof undefined) {
+            l10n.onLanguageChanged(this._updatePowerList);
+        }
 	}
 }

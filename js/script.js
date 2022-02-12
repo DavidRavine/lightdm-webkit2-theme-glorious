@@ -7,6 +7,9 @@ const l10n = new Language();
 if (typeof L10nElement === 'function')
     window.customElements.define('l-10n', L10nElement);
 
+if (typeof LangSelect === 'function')
+    window.customElements.define('lang-select', LangSelect);
+
 // Instantiate image profile
 const userProfile = new UserProfile();
 

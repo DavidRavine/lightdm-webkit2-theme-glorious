@@ -4,6 +4,8 @@ class L10nElement extends HTMLElement
     constructor()
     {
         super();
+        this._originalText = '';
+        this._updateText = this._updateText.bind(this);
     }
 
     get attr()
@@ -28,18 +30,36 @@ class L10nElement extends HTMLElement
 
     connectedCallback()
     {
+        if (typeof l10n !== typeof undefined) {
+            l10n.onLanguageChanged(this._updateText);
+        }
+
+        this._updateText();
+    }
+
+    _updateText()
+    {
         if (this.attr !== false) {
             for(let el of this.children) {
                 if ( el.hasAttribute(this.attr) ) {
-                    el.setAttribute( this.attr, this._translateText(el.getAttribute(this.attr)) );
+                    if (this._originalText === '') {
+                        this._originalText = el.getAttribute(this.attr);
+                    }
+                    el.setAttribute( this.attr, this._translateText(this._originalText) );
                 }
             }
         }
         else if (this.context) {
-            this.innerHTML = this._translateTextInContext(this.innerHTML, this.context)
+            if (this._originalText === '') {
+                this._originalText = this.innerHTML;
+            }
+            this.innerHTML = this._translateTextInContext(this._originalText, this.context)
         }
         else {
-            this.innerHTML = this._translateText(this.innerHTML);
+            if (this._originalText === '') {
+                this._originalText = this.innerHTML;
+            }
+            this.innerHTML = this._translateText(this._originalText);
         }
     }
 

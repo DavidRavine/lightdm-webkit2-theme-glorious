@@ -3,17 +3,72 @@ class Language
 {
     constructor()
     {
-        this._localStorage = window.localStorage;
-        this._languageFallback = 'en_us';
-        this._language = this._getStorageItem('Lang') || this._languageFallback;
-
-        this._language = 'de_de';
+        this._langKey = 'Lang';
+        this._langChangedCallbacks = [];
         this._languagePack = LanguagePack;
+        this._languageFallback = this._getSystemLanguage();
+        this._language = this._getStoredLanguage() || this._languageFallback;
+
     }
 
-    _getStorageItem(item)
+    getLanguagePack()
     {
-        return this._localStorage.getItem(String(item));
+        return this._languagePack;
+    }
+
+    getCurrentLanguage()
+    {
+        return this._language;
+    }
+
+    getAvailableLanguages()
+    {
+        const ctx = Object.values(this._languagePack)[0];
+        const packLangs = Object.keys(Object.values(ctx)[0]);
+        return [this._languageFallback].concat(packLangs);
+    }
+
+    updateLanguage(newLanguage)
+    {
+        this._language = newLanguage;
+        this._storeLanguage();
+        for(let cb of this._langChangedCallbacks) {
+            cb();
+        }
+    }
+
+    onLanguageChanged(callback)
+    {
+        if (typeof callback === 'function') {
+            this._langChangedCallbacks.push(callback);
+        }
+    }
+
+    _getSystemLanguage()
+    {
+        if (typeof lightdm !== typeof undefined) {
+            if (lightdm.hasOwnProperty('language')) {
+                let sysLang =  lightdm.language.code.toLowerCase().substring(0, 4);
+                const available = this.getAvailableLanguages();
+                if (!available.includes(sysLang)) {
+                    for (let altLang of lightdm.languages) {
+                        const altLangId = altLang.code.toLowerCase().substring(0,4)
+                        if (available.includes(altLangId)) {
+                            return altLangId;
+                        }
+                    }
+                }
+            }
+        }
+        return 'en_us';
+    }
+    _getStoredLanguage()
+    {
+        return window.localStorage.getItem(this._langKey);
+    }
+    _storeLanguage()
+    {
+        return window.localStorage.setItem(this._langKey, this._language);
     }
 
     __(text)

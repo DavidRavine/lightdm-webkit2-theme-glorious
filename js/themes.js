@@ -133,6 +133,7 @@ class Themes {
 		this._localStorage.removeItem('baseColor');
 		this._localStorage.removeItem('blurStrength');
 		this._localStorage.removeItem('animSpeed');
+		this._localStorage.removeItem('Lang');
 		this._saveOriginalDefaultCSS();
 	}
 
@@ -285,6 +286,7 @@ class Themes {
 
 	_updateCSSColors(bgColor, fgColor, blurStrength, animSpeed) {
 		document.documentElement.style.setProperty('--global-bg', bgColor);
+		document.documentElement.style.setProperty('--global-base-bg', bgColor.substring(0,7));
 		document.documentElement.style.setProperty('--global-fg', fgColor);
 		document.documentElement.style.setProperty('--global-blur-strength', blurStrength);
 		document.documentElement.style.setProperty('--global-animation-speed', animSpeed);
