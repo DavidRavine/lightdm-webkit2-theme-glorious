@@ -21,8 +21,14 @@ LanguagePack = {
     "Close/Back Key": "",
     // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
     "%o": (day, twoDigitDay) => "",
+    // TN: greeting appropriate for the current time of day
     "Good day": (hour) => "",
+    "%t": "",
+    // TN: display format for 12-hour mode where "%t" is the current time (e.g. "%t AM")
+    "%t %ampm": (hour) => "",
+    // TN: Day names (starting on Sunday)
     "%D": (arg1) => "",
+    // TN: Months (starting in January)
     "%M": (arg1) => "",
     "Shutdown": "",
     "Sidebar" : {

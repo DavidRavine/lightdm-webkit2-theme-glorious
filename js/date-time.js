@@ -72,29 +72,27 @@ class DateTime {
 		let greeterSuffix = null;
 		min = this._prependZero(min);
 
+        // TN: greeting appropriate for the current time of day
         const daytimeGreeting = l10n._p('Good day', hour, this._getDaytimeGreeting);
 
 		// 24-hour mode
-		if (this._twentyFourMode === true) {
-			hour = this._prependZero(hour);
-			this._sidebarClock.innerText = `${hour}:${min}`;
-			this._greeterClock.innerText = `${hour}:${min}`;
-		} else {
-			// 12-hour mode
-			midDay = (hour >= 12) ? 'PM' : 'AM';
-			hour = (hour === 0) ? 12 : ((hour > 12) ? this._prependZero(hour - 12) : this._prependZero(hour));
-			this._sidebarClock.innerText = `${hour}:${min} ${midDay}`;
-			this._greeterClock.innerText = `${hour}:${min} ${midDay}`;
-		}
-		// this._sidebarDate.innerText = `${this._daysArr[date.getDay()]}, ${this._monthsArr[date.getMonth()]} ` +
-		//	`${this._prependZero(date.getDate())}, ${date.getFullYear()}`;
+        let timeStr = `%h:${min}`;
+        let timeFormat = l10n.__("%t");
+        if (!this._twentyFourMode) {
+            // TN: display format for 12-hour mode where "%t" is the current time (e.g. "%t AM")
+            timeFormat = l10n._p('%t %ampm', hour, (hour) => '%t ' + ((hour >= 12) ? 'PM' : 'AM'));
+            hour = (hour > 0 && hour <= 12) ? hour : Math.abs(hour - 12);
+        }
+        timeStr = timeStr.replace("%h", this._prependZero(hour));
+        timeFormat = timeFormat.replace("%t", timeStr);
+        this._sidebarClock.innerText = timeFormat;
+        this._greeterClock.innerText = timeFormat;
 
         // TN: The display format for the current date
         this._sidebarDate.innerText = this._sprintfDate(l10n._x('%D, %M %o, %y', 'Sidebar'), date);
         // TN: The display format for the current date
         this._greeterDate.innerText = this._sprintfDate(l10n._x('%o of %M, %y', 'Lock Screen'), date);
-		// this._greeterDate.innerText = `${this._getDayOrdinal(date.getDate())} of ` +
-		//	`${this._monthsArr[date.getMonth()]}, ${this._daysArr[date.getDay()]}`;
+
 		this._greeterMessage.innerText = daytimeGreeting;
 	}
 
@@ -130,7 +128,9 @@ class DateTime {
     _sprintfDate(format, date)
     {
         return format
+                // TN: Day names (starting on Sunday)
                 .replace('%D', l10n._p('%D', date.getDay(), this._daysArr) )
+                // TN: Months (starting in January)
                 .replace('%M', l10n._p('%M', date.getMonth(), this._monthsArr))
                 .replace('%o', this._getDayOrdinal(date.getDate()))
                 .replace('%d', this._prependZero(date.getDate()) )

@@ -6,7 +6,7 @@ class Language
         this._languageFallback = 'en_us';
         this._language = this._getStorageItem('Lang') || this._languageFallback;
 
-//        this._language = 'de_de';
+        this._language = 'de_de';
         this._languagePack = LanguagePack;
     }
 
