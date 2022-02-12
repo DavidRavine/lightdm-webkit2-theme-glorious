@@ -7,10 +7,8 @@ class Authenticate {
 		this._tooltipPassword = document.querySelector('#tooltip-password');
 		this._password = '';
 		this._init();
-	}
 
-	_returnRandomErrorMessages() {
-		const errorMessages = [
+        this._randomErrorMessages = [
 			'Authentication failed!',
 			'You look stoopid.',
 			'This incident will be reported.',
@@ -23,11 +21,8 @@ class Authenticate {
 			'You father is right. You are a disappointment...',
 			'PAM will lock you out...'
 		];
-		return errorMessages[Math.floor(Math.random() * errorMessages.length)];	
-	}
 
-	_returnRandomSuccessfulMessages() {
-		const errorMessages = [
+        this._randomSuccessMessages = [
 			'Authentication success! Logging in!',
 			'Logging in! Biatch',
 			'Don\'t watch too much porn, bro.',
@@ -38,7 +33,18 @@ class Authenticate {
 			'Finally, someone with a good amount of IQ!',
 			'Please, don\'t watch porn.'
 		];
-		return errorMessages[Math.floor(Math.random() * errorMessages.length)];
+	}
+
+	_returnRandomErrorMessages() {
+        // TN: Array of messages for failed authentication (arbitrary number)
+		const errorMessages = l10n._p('%randomErr', -1, this._randomErrorMessages);
+        return errorMessages[Math.floor(Math.random() * errorMessages.length)];
+	}
+
+	_returnRandomSuccessfulMessages() {
+        // TN: Array of messages for successful authentication (arbitrary number)
+		const successMessages = l10n._p('%randomSuccess', -1, this._randomSuccessMessages);
+        return successMessages[Math.floor(Math.random() * successMessages.length)];
 	}
 
 	// Start authentication

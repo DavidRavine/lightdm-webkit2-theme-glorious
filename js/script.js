@@ -1,6 +1,7 @@
 // Instantiate debug mode
 const debug = new Debug();
 
+// make localization available
 const l10n = new Language();
 
 if (typeof L10nElement === 'function')

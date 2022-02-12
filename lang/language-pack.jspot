@@ -19,11 +19,14 @@ LanguagePack = {
     "Power Key": "",
     "Accounts Key": "",
     "Close/Back Key": "",
+    // TN: Array of messages for failed authentication (arbitrary number)
+    "%randomErr": (arg1) => "",
+    // TN: Array of messages for successful authentication (arbitrary number)
+    "%randomSuccess": (arg1) => "",
     // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
     "%o": (day, twoDigitDay) => "",
     // TN: greeting appropriate for the current time of day
     "Good day": (hour) => "",
-    "%t": "",
     // TN: display format for 12-hour mode where "%t" is the current time (e.g. "%t AM")
     "%t %ampm": (hour) => "",
     // TN: Day names (starting on Sunday)
@@ -31,6 +34,12 @@ LanguagePack = {
     // TN: Months (starting in January)
     "%M": (arg1) => "",
     "Shutdown": "",
+    "Reboot": "",
+    "Rebooting...": "",
+    "Hibernate": "",
+    "Hibernating...": "",
+    "Suspend": "",
+    "Suspending...": "",
     "Sidebar" : {
         // TN: The display format for the current date
         "%D, %M %o, %y": "",

@@ -19,8 +19,35 @@ LanguagePack.de_de = {
     "Power Key": "",
     "Accounts Key": "",
     "Close/Back Key": "",
+    // TN: Array of messages for failed authentication (arbitrary number)
+    "%randomErr": [
+        "Authentifizierung fehlgeschlagen!",
+        "Du siehst blöd aus.",
+        "Dieser Vorfall wird gemeldet werden.",
+        "Warum sind Sie so, wie Sie sind?",
+        "Das wird sich in 5 Sekunden selbst zerstören!",
+        "Uhhh... bist du sicher, dass du weißt, was du tust?",
+        "Du verfehlst 100% der Schüsse, die du nicht triffst - Wayne Gretzky - Michael Scott",
+        "Geh da raus, es wird explodieren!",
+        "Ich kann das den ganzen Tag machen.",
+        "Dein Vater hat recht. Du bist eine Enttäuschung...",
+        "PAM wird dich aussperren..."
+    ],
+    // TN: Array of messages for successful authentication (arbitrary number)
+    "%randomSuccess": [
+        "Authentifizierung erfolgreich! Angemeldet!",
+        "Überraschung! Angemeldet!",
+        "Guck nicht zu viele Pornos, Bruder.",
+        "Platsch! Platsch! Dein Passwort ist Schrott!",
+        "Siehst gut aus heute~",
+        "Wie gehts, Mann?",
+        "Du bist für jemanden ein Grund zum Lächeln.",
+        "Endlich mal jemand mit einem ordentlichen Maß an IQ!",
+        "Bitte, schau keine Pornos."
+    ],
     // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
     "%o": (day, twoDigitDay) => `${day}ter`,
+    // TN: greeting appropriate for the current time of day
     "Good day": (hour) => {
         if (hour >= 5 && hour < 12) {
             return "Guten Morgen!";
@@ -29,6 +56,9 @@ LanguagePack.de_de = {
         }
         return "Guten Abend!"
     },
+    // TN: display format for 12-hour mode where "%t" is the current time (e.g. "%t AM")
+    "%t %ampm": (hour) => "%t " + ((hour > 12) ? "Nachmittags" : "Vormittags"),
+    // TN: Day names (starting on Sunday)
     "%D": [
         "Sonntag",
         "Montag",
@@ -38,6 +68,7 @@ LanguagePack.de_de = {
         "Freitag",
         "Samstag"
     ],
+    // TN: Months (starting in January)
     "%M": [
         "Januar",
         "Februar",
@@ -53,6 +84,12 @@ LanguagePack.de_de = {
         "Dezember"
     ],
     "Shutdown": "Herunterfahren",
+    "Reboot": "Neu Starten",
+    "Rebooting...": "Starte neu ...",
+    "Hibernate": "Ruhezustand",
+    "Hibernating...": "Gehe zur Ruh ...",
+    "Suspend": "Bereitschaft",
+    "Suspending...": "Halte mich bereit ...",
     "Sidebar" : {
         // TN: The display format for the current date
         "%D, %M %o, %y": "%D, %d.%m.%y",

@@ -77,7 +77,7 @@ class DateTime {
 
 		// 24-hour mode
         let timeStr = `%h:${min}`;
-        let timeFormat = l10n.__("%t");
+        let timeFormat = "%t";
         if (!this._twentyFourMode) {
             // TN: display format for 12-hour mode where "%t" is the current time (e.g. "%t AM")
             timeFormat = l10n._p('%t %ampm', hour, (hour) => '%t ' + ((hour >= 12) ? 'PM' : 'AM'));

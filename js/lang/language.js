@@ -1,3 +1,4 @@
+// JSPOT:NOPARSE
 class Language
 {
     constructor()
@@ -38,7 +39,7 @@ class Language
      * Get a sring based on parameter
      *
      * The target should be a function taking the specified number of parameters (-1) as arguments
-     * If the first parameter is an integer, the target may also be an array
+     * If the first parameter is an integer, the target may also be an array -1 to get the full array
      * The last parameter is used as the default value
      */
     _p(text, ...params)
@@ -52,16 +53,18 @@ class Language
                 target = params.slice(-1)[0];
             else return text;
         }
-        console.log(typeof target);
 
         if (typeof target == 'function') {
             value = target(...params.slice(0, params.length - 1));
         }
         else if (Array.isArray(target)) {
             if (Number.isInteger(params[0])) {
-                console.log(Array.isArray(target), target.length);
-                value = target[params[0]]
+                if (params[0] < 0) value = target;
+                else value = target[params[0]]
             }
+        }
+        else if (typeof target === typeof '') {
+            value = target;
         }
 
         return value;

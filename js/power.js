@@ -25,28 +25,28 @@ class Power {
 				'icon': 'shutdown',
 				'enabled': lightdm.can_shutdown,
 				'powerCommand': lightdm.shutdown,
-				'message': 'Shutting down...'
+				'message': l10n.__('Shutting down...')
 			},
 			{
-				'name': 'Reboot',
+				'name': l10n.__('Reboot'),
 				'icon': 'restart',
 				'enabled': lightdm.can_restart,
 				'powerCommand': lightdm.restart,
-				'message': 'Rebooting...'
+				'message': l10n.__('Rebooting...')
 			},
 			{
-				'name': 'Hibernate',
+				'name': l10n.__('Hibernate'),
 				'icon': 'hibernate',
 				'enabled': lightdm.can_hibernate,
 				'powerCommand': lightdm.hibernate,
-				'message': 'Hibernating...'
+				'message': l10n.__('Hibernating...')
 			},
 			{
-				'name': 'Suspend',
+				'name': l10n.__('Suspend'),
 				'icon': 'suspend',
 				'enabled': lightdm.can_suspend,
 				'powerCommand': lightdm.suspend,
-				'message': 'Suspending...'
+				'message': l10n.__('Suspending...')
 			}
 		];
 	}
