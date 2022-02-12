@@ -21,7 +21,7 @@ class Power {
 	_createPowerObject() {
 		this._powerObject = [
 			{
-				'name': 'Shutdown',
+				'name': l10n.__('Shutdown'),
 				'icon': 'shutdown',
 				'enabled': lightdm.can_shutdown,
 				'powerCommand': lightdm.shutdown,

@@ -57,11 +57,11 @@ class DateTime {
     _getDaytimeGreeting(hour)
     {
 		if (hour >= 6 && hour < 12) {
-			return 'Morning';
+			return 'Good Morning';
 		} else if (hour >= 12 && hour < 18) {
-			return 'Afternoon';
+			return 'Good Afternoon';
 		}
-		return 'Evening';
+		return 'Good Evening';
     }
 
 	_setTime() {
@@ -89,7 +89,9 @@ class DateTime {
 		// this._sidebarDate.innerText = `${this._daysArr[date.getDay()]}, ${this._monthsArr[date.getMonth()]} ` +
 		//	`${this._prependZero(date.getDate())}, ${date.getFullYear()}`;
 
+        // TN: The display format for the current date
         this._sidebarDate.innerText = this._sprintfDate(l10n._x('%D, %M %o, %y', 'Sidebar'), date);
+        // TN: The display format for the current date
         this._greeterDate.innerText = this._sprintfDate(l10n._x('%o of %M, %y', 'Lock Screen'), date);
 		// this._greeterDate.innerText = `${this._getDayOrdinal(date.getDate())} of ` +
 		//	`${this._monthsArr[date.getMonth()]}, ${this._daysArr[date.getDay()]}`;

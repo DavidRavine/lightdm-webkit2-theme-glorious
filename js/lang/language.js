@@ -6,7 +6,7 @@ class Language
         this._languageFallback = 'en_us';
         this._language = this._getStorageItem('Lang') || this._languageFallback;
 
-        this._language = 'de_de';
+//        this._language = 'de_de';
         this._languagePack = LanguagePack;
     }
 
@@ -49,15 +49,17 @@ class Language
             target = this._maybeGet(text, this._languageFallback);
         if (typeof target === typeof '') {
             if (params.length >= 1)
-                target = params.slice(-1);
+                target = params.slice(-1)[0];
             else return text;
         }
+        console.log(typeof target);
 
         if (typeof target == 'function') {
             value = target(...params.slice(0, params.length - 1));
         }
         else if (Array.isArray(target)) {
             if (Number.isInteger(params[0])) {
+                console.log(Array.isArray(target), target.length);
                 value = target[params[0]]
             }
         }
@@ -71,7 +73,7 @@ class Language
         if (typeof target === typeof undefined) {
             return text;
         }
-        target = target[language];
+        target = target[language] ? target[language] : '';
         return target;
     }
 }

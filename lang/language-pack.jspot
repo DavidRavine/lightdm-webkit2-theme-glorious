@@ -19,13 +19,18 @@ LanguagePack = {
     "Power Key": "",
     "Accounts Key": "",
     "Close/Back Key": "",
-    "Good day": (hour, arg1) => "",
-    "%D": (arg1, arg2) => "",
-    "%M": (arg1, arg2) => "",
+    // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
+    "%o": (day, twoDigitDay) => "",
+    "Good day": (hour) => "",
+    "%D": (arg1) => "",
+    "%M": (arg1) => "",
+    "Shutdown": "",
     "Sidebar" : {
+        // TN: The display format for the current date
         "%D, %M %o, %y": "",
     },
     "Lock Screen" : {
+        // TN: The display format for the current date
         "%o of %M, %y": "",
     },
 }

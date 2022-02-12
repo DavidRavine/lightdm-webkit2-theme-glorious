@@ -6,7 +6,7 @@ LanguagePack.de_de = {
     "Background": "Hintergrund",
     "Themes": "Design",
     "Keybindings": "Tastenkürzel",
-    "Power": "",
+    "Power": "Energie",
     "Background Color and Opacity": "",
     "Foreground Color and Opacity": "",
     "Blur Strength": "",
@@ -19,7 +19,7 @@ LanguagePack.de_de = {
     "Power Key": "",
     "Accounts Key": "",
     "Close/Back Key": "",
-    "My own key": "",
+    // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
     "%o": (day, twoDigitDay) => `${day}ter`,
     "Good day": (hour) => {
         if (hour >= 5 && hour < 12) {
@@ -41,12 +41,24 @@ LanguagePack.de_de = {
     "%M": [
         "Januar",
         "Februar",
-        "März"
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
     ],
+    "Shutdown": "Herunterfahren",
     "Sidebar" : {
+        // TN: The display format for the current date
         "%D, %M %o, %y": "%D, %d.%m.%y",
     },
     "Lock Screen" : {
+        // TN: The display format for the current date
         "%o of %M, %y": "%D, %d. %M %y",
     },
 }

@@ -1,3 +1,4 @@
+// JSPOT:NOPARSE
 class L10nElement extends HTMLElement
 {
     constructor()
