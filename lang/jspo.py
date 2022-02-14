@@ -52,7 +52,6 @@ class Parser:
             if (comment):
                 if (char == '\n'):
                     comment = False
-                    print("comment end")
                 continue
             # ignore whitespace outside of quotes and funcs
             if (not open_quote and whitespace.match(char)):
@@ -92,7 +91,6 @@ class Parser:
             if ((char == '"' or char == "'" or char == "`")):
                 if (bracket_count == 0):
                     if (open_quote == char):
-                        print(f"cq? {char} {escape_char}")
                         if(prevChar != '\\'):
                             open_quote = False
                             if (colon):
@@ -137,7 +135,7 @@ class Parser:
                     if (not package_start):
                         print(f'  ERROR: missing package declaration before "{"{"}"')
                         sys.exit()
-                    print(f"open brace: '{token}' {key_token} {current_context}")
+                    #print(f"open brace: '{token}' {key_token} {current_context}")
                     if (token == "" and key_token != "" and current_context == ""):
                         current_context = key_token
                         colon = False
@@ -146,7 +144,7 @@ class Parser:
             if (char == '}' and not open_quote and bracket_count == 0):
                 if (brace_count == 0):
                     #commit last pair
-                    print(f"last brace: '{key_token}', '{token}'")
+                    #print(f"last brace: '{key_token}', '{token}'")
                     if (key_token != ""):
                         self.commit_token("global", key_token, package_member, token)
                         key_token = ""
@@ -175,7 +173,6 @@ class Parser:
             if (token == "//"):
                 comment = True
                 token = ""
-                print("comment start")
     
     def writeToFile(self, filename):
         file = open(filename, "w")
