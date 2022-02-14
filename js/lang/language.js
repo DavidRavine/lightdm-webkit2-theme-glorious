@@ -117,8 +117,17 @@ class Language
         }
         else if (Array.isArray(target)) {
             if (Number.isInteger(params[0])) {
-                if (params[0] < 0) value = target;
-                else value = target[params[0]]
+                if (params[0] < 0){
+                    value = target;
+                }
+                else {
+                    if (params[0] >= target.length) {
+                        value = target[target.length - 1];
+                    }
+                    else {
+                        value = target[params[0]];
+                    }
+                }
             }
         }
         else if (typeof target === typeof '') {
