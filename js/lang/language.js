@@ -30,10 +30,13 @@ class Language
 
     updateLanguage(newLanguage)
     {
+        if (!newLanguage) {
+            newLanguage = this._languageFallback;
+        }
         this._language = newLanguage;
         this._storeLanguage();
         for(let cb of this._langChangedCallbacks) {
-            cb();
+            cb(newLanguage);
         }
     }
 

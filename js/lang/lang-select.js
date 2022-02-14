@@ -6,8 +6,10 @@ class LangSelect extends HTMLElement
         super();
         this._selectedLanguage = l10n.getCurrentLanguage();
         this._selectEl = null;
+        this._defaultSelected = null;
         this._switchLanguage = this._switchLanguage.bind(this);
         this._toggleMenu = this._toggleMenu.bind(this);
+        this._onChange = this._onChange.bind(this);
     }
 
     connectedCallback()
@@ -17,6 +19,8 @@ class LangSelect extends HTMLElement
         if (this.dataset.id) {
             this._selectEl.setAttribute('id', this.dataset.id);
         }
+
+        l10n.onLanguageChanged(this._onChange)
 
         for (let lang of l10n.getAvailableLanguages()) {
             const optLabel = document.createElement('label');
@@ -28,6 +32,9 @@ class LangSelect extends HTMLElement
                 optLabel.classList.add('selected');
                 optEl.setAttribute('checked', 'checked');
             }
+            if (!this._defaultSelected) {
+                this._defaultSelected = optEl;
+            }
             optLabel.appendChild(optEl);
             optLabel.appendChild(document.createTextNode(lang));
             this._selectEl.appendChild(optLabel);
@@ -35,6 +42,16 @@ class LangSelect extends HTMLElement
         this._selectEl.addEventListener('change', this._switchLanguage);
         this._selectEl.addEventListener('click', this._toggleMenu);
         this.append(this._selectEl);
+    }
+
+    _onChange(newLanguage)
+    {
+        if(newLanguage !== this._selectedLanguage) {
+            this._selectedLanguage = this._defaultSelected.value;
+            this._selectEl.querySelector('.selected').classList.remove('selected');
+            this._defaultSelected.parentElement.classList.add('selected');
+        }
+
     }
 
     _switchLanguage(changeEvent)

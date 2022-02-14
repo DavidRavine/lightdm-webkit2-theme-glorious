@@ -56,7 +56,7 @@ class Parser:
                 continue
             # ignore whitespace outside of quotes and funcs
             if (not open_quote and whitespace.match(char)):
-                if (is_func and not whitespace.match(prevChar)):
+                if ((bracket_count > 0 or is_func) and not whitespace.match(prevChar)):
                     token += " "
                 continue
 
@@ -91,21 +91,24 @@ class Parser:
             # open/close quotes
             if ((char == '"' or char == "'" or char == "`")):
                 if (bracket_count == 0):
-                    if (open_quote == char and not escape_char):
-                        open_quote = False
-                        if (colon):
+                    if (open_quote == char):
+                        print(f"cq? {char} {escape_char}")
+                        if(prevChar != '\\'):
+                            open_quote = False
+                            if (colon):
+                                token += char
+                            continue
+                        else:
                             token += char
-                        continue
                     open_quote = char
                     if (not colon):
                         continue
 
             escape_char = False
-            if (not open_quote and char == '\\'):
+            if (open_quote and char == '\\' and prevChar != '\\'):
                 escape_char = True
 
             # commit full tokens
-
             if (char == ','):
                 if (not open_quote and bracket_count == 0) :
                     if (key_token != ""):

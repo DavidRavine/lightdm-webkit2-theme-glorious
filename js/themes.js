@@ -4,6 +4,7 @@ class Themes {
 		this._buttonInputReset = document.querySelector('#button-input-themes-reset');
 		this._buttonInputApply = document.querySelector('#button-input-themes-apply');
 
+        this._clockModeToggle = document.querySelector('#sidebar-settings-clock-mode');
 		this._inputBackgroundColor = document.querySelector('#sidebar-settings-bg-input');
 		this._inputBackgroundOpacity = document.querySelector('#sidebar-settings-bg-opacity-input');
 
@@ -18,6 +19,13 @@ class Themes {
 	_init() {
 		this._saveOriginalDefaultCSS();
 		this._inputButtonClickEvent();
+        this._clockModeToggle.addEventListener('change', this._toggleEvent)
+        if (typeof dateTime !== typeof undefined) {
+            if (!dateTime._twentyFourMode) {
+                this._clockModeToggle.checked = true;
+                this._toggleEvent({target:this._clockModeToggle});
+            }
+        }
 	}
 
 	_inputButtonClickEvent() {
@@ -35,6 +43,17 @@ class Themes {
 			}
 		);
 	}
+    _toggleEvent(e) {
+        if (e.target.checked) {
+            e.target.parentElement.parentElement.classList.add('enabled');
+        }
+        else {
+            e.target.parentElement.parentElement.classList.remove('enabled');
+        }
+        if (typeof dateTime !== typeof undefined) {
+            dateTime._updateClockMode(e.target.checked);
+        }
+    }
 
 	_getInputFieldsValue() {
 		const backgroundColor = (this._inputBackgroundColor.value || this._inputBackgroundColor.placeholder) +
@@ -134,6 +153,12 @@ class Themes {
 		this._localStorage.removeItem('blurStrength');
 		this._localStorage.removeItem('animSpeed');
 		this._localStorage.removeItem('Lang');
+        if (typeof l10n !== typeof undefined) {
+            l10n.updateLanguage(false);
+        }
+        this._clockModeToggle.checked = false;
+        this._toggleEvent({target:this._clockModeToggle});
+		this._localStorage.removeItem('twentyFourMode');
 		this._saveOriginalDefaultCSS();
 	}
 

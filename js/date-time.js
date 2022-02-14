@@ -101,28 +101,11 @@ class DateTime {
 		this._clockUpdater = setInterval(this._setTime, 1000);
 	}
 
-	_updateClockMode() {
+	_updateClockMode(twelveHourMode = false) {
 		clearInterval(this._clockUpdater);
-		this._twentyFourMode = !this._twentyFourMode;
+		this._twentyFourMode = !twelveHourMode;
 		this._localStorage.setItem('twentyFourMode', JSON.stringify(this._twentyFourMode));
 		this._startClock();
-	}
-
-	_clockClickEvent() {
-		this._greeterClock.addEventListener(
-			'click',
-			() => {
-				console.log('toggle 24-hour clock mode');
-				this._updateClockMode();
-			}
-		);
-		this._sidebarClock.addEventListener(
-			'click',
-			() => {
-				console.log('toggle 24-hour clock mode');
-				this._updateClockMode();
-			}
-		);
 	}
 
     _sprintfDate(format, date)
@@ -139,8 +122,7 @@ class DateTime {
     }
 
 	_init() {
-		this._twentyFourMode = JSON.parse(this._localStorage.getItem('twentyFourMode')) || false;
+		this._twentyFourMode = JSON.parse(this._localStorage.getItem('twentyFourMode')) || true;
 		this._startClock();
-		this._clockClickEvent();
 	}
 }

@@ -70,7 +70,8 @@ class L10nElement extends HTMLElement
         }
         return text;
     }
-    _translateTextInContext(text, context) {
+    _translateTextInContext(text, context)
+    {
         if (typeof l10n !== typeof undefined) {
             return l10n._x(text, context);
         }

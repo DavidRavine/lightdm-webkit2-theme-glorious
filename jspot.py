@@ -14,20 +14,24 @@ contexts = {
     "global": {}
 }
 
+def sanitiseKey(string):
+    sanitised = string.replace("\\", "\\\\")
+    return sanitised.replace("\"", '\\\"')
+
 def evaluate_html_tags(fcontents):
     for match in html_re.finditer(fcontents):
         if match.group('prop'):
-            ctx = "global"
-            if (match.group('prop') == "context"):
-                if match.group("propval") not in contexts:
-                    contexts[match.group('propval')] = {}
-                contexts[match.group('propval')][match.group("string")] = {"val", ""}
+            if (match.group("prop") == "context"):
+                key = sanitiseKey(match.group("prop"))
+                if key not in contexts:
+                    contexts[key] = {}
+                contexts[key][match.group("string")] = {"val", ""}
             elif (match.group("prop") == "attr"):
                 attr_match = re.search(match.group("propval") + "=[\"']([^\"']+)[\"']", match.group("string"))
                 if (attr_match.group(1)):
-                    contexts["global"][attr_match.group(1)] = {"val": ""}
+                    contexts["global"][sanitiseKey(attr_match.group(1))] = {"val": ""}
         else:
-            contexts["global"][match.group("string")] = {"val": ""}
+            contexts["global"][sanitiseKey(match.group("string"))] = {"val": ""}
 class It:
     it = 0
     def reset(self):
@@ -83,7 +87,6 @@ def parse_js_calls(file):
     escaped = False
     brace_count = 0
     in_quote = False
-    done = False
     match_type = ""
 
     while True:
@@ -103,7 +106,7 @@ def parse_js_calls(file):
                     last_note = tn_match.group(0)
                 buffer = ""
                 continue
-            
+
         if not reading:
             l10n_match = l10n_start_re.search(buffer)
             if l10n_match is not None:
