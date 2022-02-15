@@ -63,6 +63,22 @@ Since the Key (here `%D`) is not literally in the theme, the translator's notes 
 
 Take a look at existing `.jspo` files for examples
 
+## Date Formats
+Some Strings will ask for a date format and look something like this:
+```javascript
+    "%o of %M, %y": "",
+```
+The letters with a `%`-sign in front of them will be replaced as follows:
+ - `%d` The day of the month (01, 02 ... 31 )
+ - `%m` The month as a number (01, 02, ... 12)
+ - `%y` The year (2022, 2023 etc.)
+ - `%o` The day of the month with an ordinal affix (1st, 2nd, 3rd ... 31st)
+ - `%D` The Name of the weekday (Sunday, Monday, Tuesday etc.)
+ - `%M` The Name of the Month (January, February, March etc.)
+ 
+ You may insert punctuation and fixed words (such as "of" in the source string) at your leisure.
+
+
 ## Adding new strings to existing languages
 As of yet, you'll have to manually compare your language's `.jspo` with the `.jspot`-file and add any missing keys.
 
