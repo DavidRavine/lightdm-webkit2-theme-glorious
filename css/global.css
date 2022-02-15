@@ -1,5 +1,6 @@
 :root {
 	--global-bg: #00000020;
+	--global-base-bg: #000000FF;
 	--global-fg: #F2F2F2FF;
 	--global-animation-speed: 300ms;
 	--global-blur-strength: 9px;

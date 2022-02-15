@@ -3,6 +3,9 @@ class Power {
 		this._localStorage = window.localStorage;
 		this._powerList = document.querySelector('#power-list.sidebar-settings-item-list');
 		this._powerObject = [];
+
+        this._updatePowerList = this._updatePowerList.bind(this);
+
 		this._init();
 	}
 
@@ -21,32 +24,32 @@ class Power {
 	_createPowerObject() {
 		this._powerObject = [
 			{
-				'name': 'Shutdown',
+				'name': l10n.__('Shutdown'),
 				'icon': 'shutdown',
 				'enabled': lightdm.can_shutdown,
 				'powerCommand': lightdm.shutdown,
-				'message': 'Shutting down...'
+				'message': l10n.__('Shutting down...')
 			},
 			{
-				'name': 'Reboot',
+				'name': l10n.__('Reboot'),
 				'icon': 'restart',
 				'enabled': lightdm.can_restart,
 				'powerCommand': lightdm.restart,
-				'message': 'Rebooting...'
+				'message': l10n.__('Rebooting...')
 			},
 			{
-				'name': 'Hibernate',
+				'name': l10n.__('Hibernate'),
 				'icon': 'hibernate',
 				'enabled': lightdm.can_hibernate,
 				'powerCommand': lightdm.hibernate,
-				'message': 'Hibernating...'
+				'message': l10n.__('Hibernating...')
 			},
 			{
-				'name': 'Suspend',
+				'name': l10n.__('Suspend'),
 				'icon': 'suspend',
 				'enabled': lightdm.can_suspend,
 				'powerCommand': lightdm.suspend,
-				'message': 'Suspending...'
+				'message': l10n.__('Suspending...')
 			}
 		];
 	}
@@ -103,6 +106,13 @@ class Power {
 			this._powerList.appendChild(listItem);
 		}
 	}
+    
+    _updatePowerList()
+    {
+        this._createPowerObject();
+        this._powerList.innerHTML = "";
+        this._createPowerList();
+    }
 
 	_init() {
 		if (!lightdm) {
@@ -115,5 +125,9 @@ class Power {
 			this._createPowerObject();
 		}
 		this._createPowerList();
+
+        if (typeof l10n !== typeof undefined) {
+            l10n.onLanguageChanged(this._updatePowerList);
+        }
 	}
 }

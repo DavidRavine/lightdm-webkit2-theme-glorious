@@ -101,7 +101,7 @@ The default modifier is <kbd>Alt</kbd>. You can change it in the settings.
 
 ### Changing clock mode
 
-There are two clock modes available - `24-hour` and `12-hour`. Switch between clock modes by just clicking on the clock. Simple.
+There are two clock modes available - `24-hour` and `12-hour`. Switch between clock modes in the "Themes"-section of the settings.
 
 ### Notes
 
@@ -110,6 +110,11 @@ There are two clock modes available - `24-hour` and `12-hour`. Switch between cl
 + Set your profile image in system settings or by using `mugshot`.
 + Missing DE/WM logo? Submit a [pull request](https://github.com/manilarome/lightdm-webkit2-theme-glorious/pulls)!
 + Translations are not yet supported. PR's are welcome!
+
+### Languages
+The theme will try to use your system-language by default. You can change the language in the "Themes"-section of the settings.
+
+If you want to add support for more languages, see the readme in the `lang/` directory
 
 ### Credits
 

@@ -1,0 +1,114 @@
+LanguagePack.pt_br = {
+    "Shutting down...": "Desligando...",
+    "Enter Password": "Digite sua Senha",
+    "Accounts": "Contas",
+    "Sessions": "Sessões",
+    "Background": "Plano de Fundo",
+    "Themes": "Temas",
+    "Keybindings": "Atalhos de teclado",
+    "Power": "Força",
+    "Background Color and Opacity": "Cor de Plano de fundo e opacidade",
+    "Foreground Color and Opacity": "Cor do Plano inicial e opacidade",
+    "Blur Strength": "Intensidade de borrão",
+    "Animation Speed": "Velocidade de animação",
+    "12-Hour Clock": "relógio de 12 horas",
+    "Language": "Idioma",
+    "Reset": "Resetar",
+    "Apply": "Aplicar",
+    "Modifier Key": "Modificador",
+    "Sidebar Key": "Tecla de Barra Lateral",
+    "Sessions Key": "Tecla de Sessões",
+    "Power Key": "Tecla de Força",
+    "Accounts Key": "Tecla de Contas",
+    "Close/Back Key": "Tecla de Fechar/Voltar",
+    // TN: Array of messages for failed authentication (arbitrary number)
+    "%randomErr": [
+        "Falha na autenticação!",
+        "Será que você sabe ler?",
+        "Este incidente será reportado.",
+        "Por que você é desse jeito?",
+        "Este computador irá se autodestruir em 5 segundos!",
+        "Uhhh... Tem certeza que você sabe o que está fazendo?",
+        "“Você perde 100% das fotos que não tira – Wayne Gretzky – Michael Scott”",
+        "Dá o fora daqui, vai explodir!",
+        "Posso fazer isso o dia todo.",
+        "Seu pai estava certo. você é um desastre...",
+        "PAM você será bloqueado...",
+        "Por que você ainda tenta?",
+    ],
+    // TN: Array of messages for successful authentication (arbitrary number)
+    "%randomSuccess": [
+        "Autenticação bem sucedida! Logando!",
+        "Surpresa! Logando",
+        "Não assista muito pornô, mano.",
+        "É sério? meu cachorro consegue abrir isso!",
+        "Parece tudo bem hoje~",
+        "Como você está, cara?~",
+        "Você é a razão do sorriso de alguém.",
+        "Finalmente, alguém com neurônio!",
+        "Por favor, não assista pornô.",
+        "Sabemos que essa senha está anotada em algum lugar!",
+    ],
+    // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
+    "%o": "",
+    // TN: greeting appropriate for the current time of day
+    "Good day": (hour) => {
+        if (hour >= 5 && hour < 12) {
+            return "Bom Dia!";
+        } else if (hour >= 12 && hour < 18) {
+            return "Boa Tarde!"
+        }
+        return "Boa Noite!"
+    },
+    // TN: display format for 12-hour mode where "%t" is the current time (e.g. "%t AM")
+    "%t %ampm": (hour) => {
+        let daytime = "de manhã";
+        if (hour > 12) {
+            daytime = "da tarde";
+            if (hour > 18) {
+                daytime = "da noite";
+            }
+        }
+        return `%t ${daytime}`;
+    },
+    // TN: Day names (starting on Sunday)
+    "%D": [
+        'Segunda-feira',
+        'Terça-feira',
+        'Quarta-feira',
+        'Quinta-feira',
+        'Sexta-feira',
+        'Sábado',
+        'Domingo',
+    ],
+    // TN: Months (starting in January)
+    "%M": [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro',
+    ],
+    "Shutdown": "Desligar",
+    "Reboot": "Reiniciar",
+    "Rebooting...": "Reiniciando...",
+    "Hibernate": "Hibernar",
+    "Hibernating...": "Hibernando...",
+    "Suspend": "Suspender",
+    "Suspending...": "Suspendendo...",
+    "Sidebar" : {
+        // TN: The display format for the current date
+        "%D, %M %o, %y": "%D, %d de %M de %y",
+    },
+    "Lock Screen" : {
+        // TN: The display format for the current date
+        "%o of %M, %y": "%d de %M, %y",
+    },
+}

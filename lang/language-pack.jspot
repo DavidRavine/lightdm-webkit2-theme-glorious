@@ -1,0 +1,53 @@
+LanguagePack = {
+    "Shutting down...": "",
+    "Enter Password": "",
+    "Accounts": "",
+    "Sessions": "",
+    "Background": "",
+    "Themes": "",
+    "Keybindings": "",
+    "Power": "",
+    "Background Color and Opacity": "",
+    "Foreground Color and Opacity": "",
+    "Blur Strength": "",
+    "Animation Speed": "",
+    "12-Hour Clock": "",
+    "Language": "",
+    "Reset": "",
+    "Apply": "",
+    "Modifier Key": "",
+    "Sidebar Key": "",
+    "Sessions Key": "",
+    "Power Key": "",
+    "Accounts Key": "",
+    "Close/Back Key": "",
+    // TN: Array of messages for failed authentication (arbitrary number)
+    "%randomErr": (arg1) => "",
+    // TN: Array of messages for successful authentication (arbitrary number)
+    "%randomSuccess": (arg1) => "",
+    // TN: ordinal names for day numbers 1-31 (e.g. 1st 2nd 3rd 4th ...)
+    "%o": (day, twoDigitDay) => "",
+    // TN: greeting appropriate for the current time of day
+    "Good day": (hour) => "",
+    // TN: display format for 12-hour mode where "%t" is the current time (e.g. "%t AM")
+    "%t %ampm": (hour) => "",
+    // TN: Day names (starting on Sunday)
+    "%D": (arg1) => "",
+    // TN: Months (starting in January)
+    "%M": (arg1) => "",
+    "Shutdown": "",
+    "Reboot": "",
+    "Rebooting...": "",
+    "Hibernate": "",
+    "Hibernating...": "",
+    "Suspend": "",
+    "Suspending...": "",
+    "Sidebar" : {
+        // TN: The display format for the current date
+        "%D, %M %o, %y": "",
+    },
+    "Lock Screen" : {
+        // TN: The display format for the current date
+        "%o of %M, %y": "",
+    },
+}
